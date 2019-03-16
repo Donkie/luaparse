@@ -651,6 +651,10 @@
           break;
         return scanPunctuator('~');
 
+      case 33: // !
+        if (61 === next) return scanPunctuator('!=');
+        return scanPunctuator('!');
+
       case 58: // :
         if (features.labels)
           if (58 === next) return scanPunctuator('::');
@@ -1299,7 +1303,7 @@
   }
 
   function isUnary(token) {
-    if (Punctuator === token.type) return '#-~'.indexOf(token.value) >= 0;
+    if (Punctuator === token.type) return '#-~!'.indexOf(token.value) >= 0;
     if (Keyword === token.type) return 'not' === token.value;
     return false;
   }
@@ -2046,7 +2050,7 @@
         case 42: case 47: case 37: return 10; // * / %
         case 43: case 45: return 9; // + -
         case 38: return 6; // &
-        case 126: return 5; // ~
+        case 33: case 126: return 5; // ~ !
         case 124: return 4; // |
         case 60: case 62: return 3; // < >
       }
@@ -2057,7 +2061,7 @@
         case 60: case 62:
             if('<<' === operator || '>>' === operator) return 7; // << >>
             return 3; // <= >=
-        case 61: case 126: return 3; // == ~=
+        case 61: case 33: case 126: return 3; // == ~= !=
         case 111: return 1; // or
       }
     } else if (97 === charCode && 'and' === operator) return 2;
