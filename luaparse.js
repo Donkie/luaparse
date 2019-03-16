@@ -591,9 +591,9 @@
   function lex() {
     skipWhiteSpace();
 
-    // Skip comments beginning with --
-    while (45 === input.charCodeAt(index) &&
-           45 === input.charCodeAt(index + 1)) {
+    // Skip comments
+    while ((45 === input.charCodeAt(index) && 45 === input.charCodeAt(index + 1)) || // --
+          (47 === input.charCodeAt(index) && (47 === input.charCodeAt(index + 1) || 42 === input.charCodeAt(index + 1)))) { // // or /*
       scanComment();
       skipWhiteSpace();
     }
@@ -1102,10 +1102,13 @@
       , isLong = false
       , commentStart = index
       , lineStartComment = lineStart
-      , lineComment = line;
+      , lineComment = line
+      , isCStyleMulti = '*' === input.charAt(tokenStart + 1);
 
-    if ('[' === character) {
-      content = readLongString(true);
+    if ('[' === character || isCStyleMulti) {
+      if(isCStyleMulti) index--;
+      
+      content = readLongString(true, isCStyleMulti);
       // This wasn't a multiline comment after all.
       if (false === content) content = character;
       else isLong = true;
@@ -1141,18 +1144,20 @@
   // Read a multiline string by calculating the depth of `=` characters and
   // then appending until an equal depth is found.
 
-  function readLongString(isComment) {
+  function readLongString(isComment, isCStyleComment) {
     var level = 0
       , content = ''
       , terminator = false
       , character, stringStart, firstLine = line;
 
-    ++index; // [
-
-    // Calculate the depth of the comment.
-    while ('=' === input.charAt(index + level)) ++level;
-    // Exit, this is not a long string afterall.
-    if ('[' !== input.charAt(index + level)) return false;
+    if(!isCStyleComment){
+      ++index; // [
+  
+      // Calculate the depth of the comment.
+      while ('=' === input.charAt(index + level)) ++level;
+      // Exit, this is not a long string afterall.
+      if ('[' !== input.charAt(index + level)) return false;
+    }
 
     index += level + 1;
 
@@ -1169,12 +1174,19 @@
 
       // Once the delimiter is found, iterate through the depth count and see
       // if it matches.
-      if (']' === character) {
-        terminator = true;
-        for (var i = 0; i < level; ++i) {
-          if ('=' !== input.charAt(index + i)) terminator = false;
+      if (isCStyleComment){
+        if ('*' === character && '/' === input.charAt(index)) {
+          terminator = true;
         }
-        if (']' !== input.charAt(index + level)) terminator = false;
+      }
+      else{
+        if (']' === character) {
+          terminator = true;
+          for (var i = 0; i < level; ++i) {
+            if ('=' !== input.charAt(index + i)) terminator = false;
+          }
+          if (']' !== input.charAt(index + level)) terminator = false;
+        }
       }
 
       // We reached the end of the multiline string. Get out now.

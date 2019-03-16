@@ -12,3 +12,8 @@ if true--[[comment]]then end
 --[==@n@break --]]
 if true -- comment@n@then end
 --[=[x]x                                  -- FAIL
+// comment
+//coment
+break//comment
+/*comment*/
+if true/*comment*/then end

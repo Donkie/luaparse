@@ -821,6 +821,296 @@
     {
       "source": "--[=[x]x",
       "result": "[1:9] unfinished long comment (starting at line 1) near '<eof>'"
+    },
+    {
+      "source": "// comment",
+      "result": {
+        "type": "Chunk",
+        "body": [],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 10
+          },
+          "end": {
+            "line": 1,
+            "column": 10
+          }
+        },
+        "range": [
+          10,
+          10
+        ],
+        "comments": [
+          {
+            "type": "Comment",
+            "value": " comment",
+            "raw": "// comment",
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 10
+              }
+            },
+            "range": [
+              0,
+              10
+            ]
+          }
+        ],
+        "globals": []
+      }
+    },
+    {
+      "source": "//coment",
+      "result": {
+        "type": "Chunk",
+        "body": [],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 8
+          },
+          "end": {
+            "line": 1,
+            "column": 8
+          }
+        },
+        "range": [
+          8,
+          8
+        ],
+        "comments": [
+          {
+            "type": "Comment",
+            "value": "coment",
+            "raw": "//coment",
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 8
+              }
+            },
+            "range": [
+              0,
+              8
+            ]
+          }
+        ],
+        "globals": []
+      }
+    },
+    {
+      "source": "break//comment",
+      "result": {
+        "type": "Chunk",
+        "body": [
+          {
+            "type": "BreakStatement",
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 5
+              }
+            },
+            "range": [
+              0,
+              5
+            ]
+          }
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 5
+          }
+        },
+        "range": [
+          0,
+          5
+        ],
+        "comments": [
+          {
+            "type": "Comment",
+            "value": "comment",
+            "raw": "//comment",
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 5
+              },
+              "end": {
+                "line": 1,
+                "column": 14
+              }
+            },
+            "range": [
+              5,
+              14
+            ]
+          }
+        ],
+        "globals": []
+      }
+    },
+    {
+      "source": "/*comment*/",
+      "result": {
+        "type": "Chunk",
+        "body": [],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 11
+          },
+          "end": {
+            "line": 1,
+            "column": 11
+          }
+        },
+        "range": [
+          11,
+          11
+        ],
+        "comments": [
+          {
+            "type": "Comment",
+            "value": "comment",
+            "raw": "/*comment*/",
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 11
+              }
+            },
+            "range": [
+              0,
+              11
+            ]
+          }
+        ],
+        "globals": []
+      }
+    },
+    {
+      "source": "if true/*comment*/then end",
+      "result": {
+        "type": "Chunk",
+        "body": [
+          {
+            "type": "IfStatement",
+            "clauses": [
+              {
+                "type": "IfClause",
+                "condition": {
+                  "type": "BooleanLiteral",
+                  "value": true,
+                  "raw": "true",
+                  "loc": {
+                    "start": {
+                      "line": 1,
+                      "column": 3
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 7
+                    }
+                  },
+                  "range": [
+                    3,
+                    7
+                  ]
+                },
+                "body": [],
+                "loc": {
+                  "start": {
+                    "line": 1,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 22
+                  }
+                },
+                "range": [
+                  0,
+                  22
+                ]
+              }
+            ],
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 26
+              }
+            },
+            "range": [
+              0,
+              26
+            ]
+          }
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 26
+          }
+        },
+        "range": [
+          0,
+          26
+        ],
+        "comments": [
+          {
+            "type": "Comment",
+            "value": "comment",
+            "raw": "/*comment*/",
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 18
+              }
+            },
+            "range": [
+              7,
+              18
+            ]
+          }
+        ],
+        "globals": []
+      }
     }
   ];
 }));
