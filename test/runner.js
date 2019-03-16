@@ -232,6 +232,7 @@
         case 'NilLiteral':
         case 'VarargLiteral':
         case 'BreakStatement':
+        case 'ContinueStatement':
         case 'Comment':
           break;
         default:

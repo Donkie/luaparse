@@ -53,3 +53,4 @@ for a = 1, 2 do return return end       -- FAIL
 for a = p, q do do end end
 for a = p, q do do break end end
 for a = p, q do do return end end
+for a = 1, 2 do continue end

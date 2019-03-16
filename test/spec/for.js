@@ -3543,6 +3543,163 @@
           }
         ]
       }
+    },
+    {
+      "source": "for a = p, q do continue end",
+      "result": {
+        "type": "Chunk",
+        "body": [
+          {
+            "type": "ForNumericStatement",
+            "variable": {
+              "type": "Identifier",
+              "name": "a",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 4
+                },
+                "end": {
+                  "line": 1,
+                  "column": 5
+                }
+              },
+              "range": [
+                4,
+                5
+              ],
+              "isLocal": true
+            },
+            "start": {
+              "type": "Identifier",
+              "name": "p",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 8
+                },
+                "end": {
+                  "line": 1,
+                  "column": 9
+                }
+              },
+              "range": [
+                8,
+                9
+              ],
+              "isLocal": false
+            },
+            "end": {
+              "type": "Identifier",
+              "name": "q",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 11
+                },
+                "end": {
+                  "line": 1,
+                  "column": 12
+                }
+              },
+              "range": [
+                11,
+                12
+              ],
+              "isLocal": false
+            },
+            "step": null,
+            "body": [
+              {
+                "type": "ContinueStatement",
+                "loc": {
+                  "start": {
+                    "line": 1,
+                    "column": 16
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 24
+                  }
+                },
+                "range": [
+                  16,
+                  24
+                ]
+              }
+            ],
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 28
+              }
+            },
+            "range": [
+              0,
+              28
+            ]
+          }
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 28
+          }
+        },
+        "range": [
+          0,
+          28
+        ],
+        "comments": [],
+        "globals": [
+          {
+            "type": "Identifier",
+            "name": "p",
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 8
+              },
+              "end": {
+                "line": 1,
+                "column": 9
+              }
+            },
+            "range": [
+              8,
+              9
+            ],
+            "isLocal": false
+          },
+          {
+            "type": "Identifier",
+            "name": "q",
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 11
+              },
+              "end": {
+                "line": 1,
+                "column": 12
+              }
+            },
+            "range": [
+              11,
+              12
+            ],
+            "isLocal": false
+          }
+        ]
+      }
     }
   ];
 }));

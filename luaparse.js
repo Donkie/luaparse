@@ -142,6 +142,12 @@
       };
     }
 
+    , continueStatement: function() {
+      return {
+          type: 'ContinueStatement'
+      };
+    }
+
     , gotoStatement: function(label) {
       return {
           type: 'GotoStatement'
@@ -1275,7 +1281,7 @@
       case 6:
         return 'elseif' === id || 'repeat' === id || 'return' === id;
       case 8:
-        return 'function' === id;
+        return 'continue' === id || 'function' === id;
     }
     return false;
   }
@@ -1502,6 +1508,7 @@
         case 'for':      next(); return parseForStatement();
         case 'repeat':   next(); return parseRepeatStatement();
         case 'break':    next(); return parseBreakStatement();
+        case 'continue': next(); return parseContinueStatement();
         case 'do':       next(); return parseDoStatement();
         case 'goto':     next(); return parseGotoStatement();
       }
@@ -1549,6 +1556,12 @@
 
   function parseBreakStatement() {
     return finishNode(ast.breakStatement());
+  }
+
+  //     continue ::= 'continue'
+
+  function parseContinueStatement() {
+    return finishNode(ast.continueStatement());
   }
 
   //     goto ::= 'goto' Name
