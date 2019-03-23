@@ -42,3 +42,4 @@ a = a <=                                -- FAIL
 a = a >=                                -- FAIL
 a = a != b
 a = ! p
+a = 1 && 2 || 2

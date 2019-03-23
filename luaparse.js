@@ -322,7 +322,7 @@
       };
     }
     , binaryExpression: function(operator, left, right) {
-      var type = ('and' === operator || 'or' === operator) ?
+      var type = ('and' === operator || 'or' === operator || '&&' === operator || '||' === operator) ?
         'LogicalExpression' :
         'BinaryExpression';
 
@@ -672,6 +672,10 @@
         return scanPunctuator('/');
 
       case 38: case 124: // & |
+        if (next === charCode){ // && ||
+          return scanIdentifierOrKeyword();
+        }
+
         if (!features.bitwiseOperators)
           break;
 
@@ -771,6 +775,10 @@
 
     // Decide on the token type and possibly cast the value.
     if (isKeyword(value)) {
+      type = Keyword;
+    } else if ((value === '|' || value === '&') && input.charAt(index) === value){ // || &&
+      index++;
+      value = value + value; // double it
       type = Keyword;
     } else if ('true' === value || 'false' === value) {
       type = BooleanLiteral;
@@ -2062,7 +2070,8 @@
             if('<<' === operator || '>>' === operator) return 7; // << >>
             return 3; // <= >=
         case 61: case 33: case 126: return 3; // == ~= !=
-        case 111: return 1; // or
+        case 111: case 124: return 1; // or ||
+        case 38: return 2; // &&
       }
     } else if (97 === charCode && 'and' === operator) return 2;
     return 0;
